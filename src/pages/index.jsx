@@ -15,10 +15,16 @@ export default function Home() {
   }
 
   const { user } = session
+  console.log(session);
 
   const handleGenerate = () => {
     axios
-      .get(`https://api.github.com/users/${userName}/repos`)
+      .get(`https://api.github.com/users/${userName}/repos`,
+      {
+        headers: {
+          authorization: `token ${session.accessToken}`
+        }
+      })
       .then((response) => {
         console.log(response.data)
       })
